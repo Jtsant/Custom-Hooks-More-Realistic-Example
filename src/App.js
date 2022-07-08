@@ -17,19 +17,12 @@ function App() {
     setTasks(loadedTasks);
   }, []);
 
-  const {
-    isLoading,
-    error,
-    sendRequest: fetchTasks,
-  } = useHttp(
-    {
-      url: "https://a-more-realistic-example-97f27-default-rtdb.europe-west1.firebasedatabase.app/tasks.json",
-    },
-    transformTasks
-  );
+  const { isLoading, error, sendRequest: fetchTasks } = useHttp(transformTasks);
 
   useEffect(() => {
-    fetchTasks();
+    fetchTasks({
+      url: "https://a-more-realistic-example-97f27-default-rtdb.europe-west1.firebasedatabase.app/tasks.json",
+    });
   }, [fetchTasks]);
 
   const taskAddHandler = (task) => {
